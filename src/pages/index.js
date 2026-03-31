@@ -1,4 +1,5 @@
 import { motion, useTransform } from "framer-motion";
+import Head from "next/head";
 import HeroSlide from "@/components/slides/HeroSlide";
 import useScreenHeight from "@/hooks/useScreenHeight";
 import { useScrollProgress } from "@/components/ScrollContext";
@@ -21,8 +22,8 @@ export default function Home() {
   const slide3Opacity = useTransform(scrollYProgress, [0.35, 0.55, 0.65], [0, 0.2, 0]);
   const slide4Opacity = useTransform(scrollYProgress, [0.6, 0.65, 0.775], [0, 0.5, 0]);
   const slide5Opacity = useTransform(scrollYProgress, [0.75, 0.775, 0.815], [0, 0.3, 0]);
-  const slide6Opacity = useTransform(scrollYProgress, [0.8, 0.825, 0.85], [0, 0.2, 0]);
-  const slide7Opacity = useTransform(scrollYProgress, [0.825, 0.85, 1], [0, 0.1, 0.3]);
+  const slide6Opacity = useTransform(scrollYProgress, [0.8, 0.875, 0.9], [0, 0.2, 0]);
+  const slide7Opacity = useTransform(scrollYProgress, [0.875, 0.9, 1], [0, 0.1, 0.3]);
 
   const scrollToContinue = () => {
     const scrollPoints = [0, 0.1, 0.225, 0.275, 0.53, 0.625, 0.72, 0.825, 1];
@@ -39,7 +40,11 @@ export default function Home() {
   }
 
   return (
-    <div ref={containerRef} className="relative min-h-screen" style={{height: screenHeight * N_SLIDES}}>
+    <>
+      <Head>
+        <title>Andrés Barrera | Mission</title>
+      </Head>
+      <div ref={containerRef} className="relative min-h-screen" style={{height: screenHeight * N_SLIDES}}>
       {/* Background Slides */}
       <div className="fixed inset-0 z-0">
         {/* Slide 1 Background */}
@@ -155,8 +160,8 @@ export default function Home() {
         { scrollYValue >= 0.05 && scrollYValue < 0.15 && <BandungIndonesiaSlide /> }
         { scrollYValue >= 0.15 && scrollYValue < 0.35 && <ImpactFocusedSlide /> }
         { scrollYValue >= 0.35 && scrollYValue < 0.6 && <MissionAlignmentSlide /> }
-        { scrollYValue >= 0.6 && scrollYValue < 0.95 && <PositioningSlide /> }
-        { scrollYValue >= 0.95 && <FinalSlide /> }
+        { scrollYValue >= 0.6 && scrollYValue < 0.9 /* Originally < 0.95 */ && <PositioningSlide />}
+        { scrollYValue >= 0.9 /* Originally < 0.95 */ && <FinalSlide /> }
         <motion.div
           className="w-fit left-0 right-0 mx-auto md:ml-0 bottom-[3%] md:left-[20%] md:bottom-[8%] absolute cursor-pointer"
           initial={{ opacity: 0 }}
@@ -191,6 +196,7 @@ export default function Home() {
         className="fixed top-0 left-0 right-0 h-1 bg-white z-50 origin-left"
         style={{ scaleX: scrollYProgress }}
       />
-    </div>
+      </div>
+    </>
   );
 }

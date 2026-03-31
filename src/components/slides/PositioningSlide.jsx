@@ -14,9 +14,9 @@ export default function PositioningSlide() {
   const { smoothYProgress } = useScrollProgress();
 
   const mapWidth = useTransform(smoothYProgress, [0.6, 0.7, 0.75], [300, 300, 600]);
-  const mapZoom = useTransform(smoothYProgress, [0.6, 0.75, 0.8, 0.815, 0.825, 0.9], [12, 12, 1, 2.5, 1, 2]);
-  const mapLatitude = useTransform(smoothYProgress, [0.6, 0.79, 0.8, 0.815, 0.825], [30.278, 30.278, 20, 48, 10]);
-  const mapLongitude = useTransform(smoothYProgress, [0.6, 0.8, 0.825], [-97.7431, -97.7431, 109]);
+  const mapZoom = useTransform(smoothYProgress, [0.6, 0.7, 0.75, 0.83, 0.875, 0.9], [12, 12, 1, 2.5, 1, 2]);
+  const mapLatitude = useTransform(smoothYProgress, [0.6, 0.74, 0.78, 0.845, 0.875], [30.278, 30.278, 10, 48, 10]);
+  const mapLongitude = useTransform(smoothYProgress, [0.6, 0.8, 0.875], [-97.7431, -97.7431, 109]);
 
   return (
     <section className="fixed w-full min-h-screen p-4 sm:p-6 md:p-[7%]">
@@ -36,11 +36,11 @@ export default function PositioningSlide() {
                   show={[0.625, 0.75]}
                   duration={[0.02, 0.02]}
                 >
-                    Based in Austin, Texas
+                    Started in Austin, Texas
                 </ScrollTypewriterText>
               </motion.div>
               <SlideItem show={[0.625, 0.75]} duration={[0.02, 0.02]}>
-                <p className="text-white text-sm sm:text-base md:text-lg text-left">I currently live in Austin, Texas, which is considered to be one of the foremost startup hubs in the United States. I love Austin for its mix of culture, technology, and outdoor activities. However, my life does not revolve around one place, but rather around the world.</p>
+                <p className="text-white text-sm sm:text-base md:text-lg text-left">I got my start in Austin, Texas, which is considered to be one of the most active startup hubs in the United States. I love Austin for its mix of culture, technology, and outdoor activities. Although many of my experiences started in Austin, my life doesn't revolve around one place. I currently operate within several networks around the globe.</p>
               </SlideItem>
               <SlideItem show={[0.65, 0.75]} duration={[0.02, 0.02]}>
                 <motion.div className="w-fit border-2 border-white pl-2 pr-3 py-1 text-white bg-[rgba(0,0,0,0.7)]" style={{borderRadius: "20px"}}>
@@ -57,21 +57,22 @@ export default function PositioningSlide() {
               </SlideItem>
             </motion.div>}
             
-            {smoothYProgress.get() >= 0.75 && smoothYProgress.get() < 0.85 && <motion.div className="flex flex-col items-start grow-0 gap-[20px]" style={{ width: mapWidth.get() == 300 ? "calc(100% - 335px)" : "100%" }}>
+            {smoothYProgress.get() >= 0.75 && smoothYProgress.get() < 0.9 && <motion.div className="flex flex-col items-start grow-0 gap-[20px]" style={{ width: mapWidth.get() == 300 ? "calc(100% - 335px)" : "100%" }}>
               <motion.div className="flex flex-col items-start">
                 <ScrollTypewriterText 
                   className="text-2xl sm:text-4xl md:text-6xl font-bold text-left flex items-start grow-0 leading-[1.25]"
-                  show={[0.75, 0.85]}
+                  show={[0.75, 0.9]}
                   duration={[0.02, 0.02]}
                 >
                     Globally Connected
                 </ScrollTypewriterText>
               </motion.div>
-              <SlideItem show={[0.75, 0.85]} duration={[0.02, 0.02]}>
-                <p className="text-white text-sm sm:text-base md:text-lg text-left">I have had the privilege of walking the streets, trails, and beaches of 24 countries across 6 continents and living in Japan, Vietnam, and the United States. I speak English and Spanish fluently, with a foundational understanding of Romance languages, Japanese, and Russian. I am open to work in Mexico, Argentina, The Netherlands, Belgium, Spain, Thailand, Indonesia, Singapore, and Japan.</p>
+              <SlideItem show={[0.75, 0.9]} duration={[0.02, 0.02]}>
+                <p className="text-white text-sm sm:text-base md:text-lg text-left">I have had the privilege of walking the streets, trails, and beaches of 25 countries across 6 continents and living in Japan, Vietnam, Colombia, and the United States. I speak English and Spanish fluently, with a foundational understanding of Romance languages, Japanese, and Russian. I am open to international work and am actively working to build networks in LatAm, Europe, and Asia.</p>
               </SlideItem>
             </motion.div>}
 
+            {/* 
             {smoothYProgress.get() >= 0.85 && <motion.div className="flex flex-col items-start grow-0 gap-[20px]" style={{ width: mapWidth.get() == 300 ? "calc(100% - 335px)" : "100%" }}>
               <motion.div className="flex flex-col items-start">
                 <ScrollTypewriterText 
@@ -85,9 +86,10 @@ export default function PositioningSlide() {
               <SlideItem show={[0.85, 0.95]} duration={[0.02, 0.02]}>
                 <p className="text-white text-sm sm:text-base md:text-lg text-left">Growing up as a military brat, I lived in Tokyo, Japan for several years. Returning in 2023, I spent a year traveling Asia, visiting 9 countries and setting up my home in Saigon, Vietnam. I love the culture, food, and people of Asia, and am open to work in Thailand, Indonesia, Singapore, and Japan.</p>
               </SlideItem>
-            </motion.div>}
+            </motion.div>} 
+            */}
 
-            <SlideItem show={[0.75, 0.95]} duration={[0.02, 0.02]}>
+            <SlideItem show={[0.75, 0.9]} duration={[0.02, 0.02]}>
               <motion.div className="w-fit border-2 border-white pl-2 pr-3 py-1 text-white bg-[rgba(0,0,0,0.7)] mt-2 ml-2" style={{borderRadius: "20px"}}>
                 <ScrollTypewriterDiv
                   className="h-fit flex flex-row gap-1 sm:gap-[5px] items-center"
@@ -100,7 +102,7 @@ export default function PositioningSlide() {
                 />
                 <ScrollTypewriterDiv
                   className="h-fit flex flex-row gap-1 sm:gap-[5px] items-center"
-                  show={[0.8, 0.85]}
+                  show={[0.8, 0.9]}
                   duration={[0.02, 0.02]}
                   content={[
                     {node: <svg fill="white" height="20px" width="20px" xmlns="http://www.w3.org/2000/svg" className="shrink-0" viewBox="0 -960 960 960"><path d="M480-480q33 0 56.5-23.5T560-560q0-33-23.5-56.5T480-640q-33 0-56.5 23.5T400-560q0 33 23.5 56.5T480-480Zm0 400Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Z"/></svg>},
@@ -109,7 +111,7 @@ export default function PositioningSlide() {
                 />
                 <ScrollTypewriterDiv
                   className="h-fit flex flex-row gap-1 sm:gap-[5px] items-center"
-                  show={[0.85, 1]}
+                  show={[0.9, 1]}
                   duration={[0.02, 0.02]}
                   content={[
                     {node: <svg fill="white" height="20px" width="20px" xmlns="http://www.w3.org/2000/svg" className="shrink-0" viewBox="0 -960 960 960"><path d="M480-480q33 0 56.5-23.5T560-560q0-33-23.5-56.5T480-640q-33 0-56.5 23.5T400-560q0 33 23.5 56.5T480-480Zm0 400Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Z"/></svg>},
@@ -119,7 +121,7 @@ export default function PositioningSlide() {
             </motion.div>
           </SlideItem>
           </motion.div>
-          <SlideItem show={[0.625, 0.95]} duration={[0.02, 0.02]}>
+          <SlideItem show={[0.625, 0.9]} duration={[0.02, 0.02]}>
             {/* Map */}
             <motion.div 
               className="h-[250px] sm:h-[350px] md:h-[400px] max-w-[300px] md:max-w-[600px] rounded-lg shadow-2xl shadow-black/50 shrink-0 overflow-clip w-full mx-auto lg:mx-0" 
@@ -163,6 +165,13 @@ export default function PositioningSlide() {
                 <Marker longitude={-79.5568} latitude={9.5394}>
                   <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', transform: 'translateY(-10px)' }}>
                     <MapTextMarker style={{ color: 'black' }} backgroundColor="white">🇵🇦</MapTextMarker>
+                  </div>
+                </Marker>
+
+                { /* Colombia */ }
+                <Marker longitude={-74.2973} latitude={4.5709}>
+                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', transform: 'translateY(-10px)' }}>
+                    <MapTextMarker style={{ color: 'black' }} backgroundColor="white">🇨🇴</MapTextMarker>
                   </div>
                 </Marker>
                 

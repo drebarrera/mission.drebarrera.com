@@ -91,17 +91,17 @@ export default function ImpactFocusedSlide() {
                 show={[0.2, 0.35]}
                 duration={[0.02, 0.02]}
               >
-                  Impact-Focused Narratives
+                  Built Different
               </ScrollTypewriterText>
               <div className="w-full flex justify-end">
                 <SlideItem show={[0.2, 0.35]} duration={[0.02, 0.02]}>
-                  <p className="font-[Courier] text-base sm:text-xl md:text-2xl text-right text-[#FFC337]">&lt; From Technical Perspectives /&gt;</p>
+                  <p className="font-[Courier] text-base sm:text-xl md:text-2xl text-right text-[#FFC337]">&lt; Engineering with community at the center /&gt;</p>
                 </SlideItem>
               </div>
             </motion.div>
             <SlideItem show={[0.2, 0.275]} duration={[0.02, 0.02]}>
               <p className="text-white text-sm sm:text-base md:text-lg text-left whitespace-pre-line">
-                I'm a Software and Product Engineer with a Bachelor's degree in Computer Engineering from <em>Purdue University</em>. I began learning how to code in middle school and have since led engineering, product, and community efforts across three continents. With technical skills in application development, dashboard creation, and insight analysis, I craft impactful narratives that drive change and inspire action. As a technical consultant, Latino engineer, and non-profit leader, my mission is clear: to lift up my community and create a lasting positive impact on the world.
+                I developed my first app when I was 13 years old, graduated high school at 16, and started my first impact organization my sophomore year of university. Since then, I've cultivated a skill set for building human-centered systems - with a Bachelor's in Computer Engineering from Purdue University, consulting across industries from defense to the arts, and leading communities of like-minded innovators. <b>I'm a lifelong learner who believes that<em> technology that ignores human complexity fails the people it claims to serve</em></b>. That's why every system I've built has had a community at its center.
               </p>
             </SlideItem>
             <SlideItem show={[0.275, 0.35]} duration={[0.02, 0.02]}>

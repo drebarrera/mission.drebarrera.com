@@ -1,14 +1,52 @@
 import { motion, AnimatePresence } from "framer-motion";
 import TypewriterText from "../TypewriterText";
 import TypewriterDiv from "../TypewriterDiv";
-import { useState, useEffect } from "react";
+import { useMemo, useState, useEffect } from "react";
 import Logo from "../Logo";
 import SlideItem from "./SlideItem";
+
+const DATE_CYCLE_DAYS = 53;
+// Cycle anchor: "today" when this requirement was defined.
+const DATE_CYCLE_START_UTC = { year: 2026, monthIndex: 2, day: 31 }; // Mar 31, 2026
+
+function utcDayNumber(date) {
+  return Math.floor(
+    Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()) /
+      86400000
+  );
+}
+
+function dateFromUtcDayNumber(dayNumber) {
+  return new Date(dayNumber * 86400000);
+}
 
 export default function HeroSlide() {
 
   const [slide, setSlide] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
+  const cycleDateLabel = useMemo(() => {
+    const startDay = Math.floor(
+      Date.UTC(
+        DATE_CYCLE_START_UTC.year,
+        DATE_CYCLE_START_UTC.monthIndex,
+        DATE_CYCLE_START_UTC.day
+      ) / 86400000
+    );
+
+    const now = new Date();
+    const nowDay = utcDayNumber(now);
+    const daysSinceStart = Math.max(0, nowDay - startDay);
+    const cyclesSinceStart = Math.floor(daysSinceStart / DATE_CYCLE_DAYS);
+    const displayDay = startDay + cyclesSinceStart * DATE_CYCLE_DAYS;
+    const displayDate = dateFromUtcDayNumber(displayDay);
+
+    return new Intl.DateTimeFormat("en-US", {
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+      timeZone: "UTC",
+    }).format(displayDate);
+  }, []);
 
   useEffect(() => {
     setTimeout(() => {
@@ -23,7 +61,7 @@ export default function HeroSlide() {
   return (
     <section className="fixed w-full min-h-screen flex justify-center p-4 sm:p-6 md:p-[7%]">
       <motion.div
-        className="flex flex-col gap-6 sm:gap-8 md:gap-[50px] text-center text-white w-full max-w-[1200px] mx-auto relative items-start overflow-clip"
+        className="flex flex-col gap-6 sm:gap-8 md:gap-[20px] text-center text-white w-full max-w-[1200px] mx-auto relative items-start overflow-clip"
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.2 }}
@@ -35,7 +73,7 @@ export default function HeroSlide() {
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="w-full max-w-[415px] mx-auto flex flex-col bg-[rgba(0,0,0,0.7)] p-3 sm:p-4 md:p-[15px] items-start shrink-0 overflow-clip"
+            className="w-full max-w-[500px] mx-auto flex flex-col bg-[rgba(0,0,0,0.7)] p-3 sm:p-4 md:p-[15px] items-start shrink-0 overflow-clip"
             layout
             animate={{ height: "auto" }}
             transition={{ 
@@ -68,10 +106,9 @@ export default function HeroSlide() {
                   className="overflow-hidden"
                 >
                   <TypewriterDiv className="flex flex-row gap-1 sm:gap-2 md:gap-[8px] shrink-0 overflow-clip" trigger={isLoaded || slide > 0} delay={1000} step={50} onFinish={() => nextSlide()} content={[
-                    {node: "Andrés Barrera:", className: "text-lg sm:text-xl md:text-2xl font-regular"},
-                    {node: "Software Engineer", className: "text-lg sm:text-xl md:text-2xl font-regular italic"}
+                    {node: "Engineer | Systems & Cultural Intelligence", className: "text-lg sm:text-xl md:text-2xl font-regular italic pb-[5px]"}
                   ]}/>
-                  <p className="w-fit text-xs sm:text-sm text-white">June 29, 2025</p>
+                  <p className="w-fit text-xs sm:text-sm text-white">{cycleDateLabel}</p>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -93,7 +130,7 @@ export default function HeroSlide() {
               <div className="flex flex-col gap-[10px] items-start text-center sm:text-left">
                 <div className="flex flex-row md:flex-col gap-[10px] items-center md:items-start text-center sm:text-left">
                   <motion.img 
-                    src="/assets/andres_barrera_circular_profile_image.png" 
+                    src="/assets/andres_barrera_circular_profile_image.webp" 
                     alt="Andrés Barrera" 
                     className="w-[60px] h-[60px] md:w-[100px] md:h-[100px] object-cover rounded-lg shadow-2xl shadow-black/50 mx-auto sm:mx-0" 
                   />
@@ -122,8 +159,8 @@ export default function HeroSlide() {
                   />
                 </div>
                 <p className="text-white text-base md:text-lg lg:text-xl text-left sm:text-left leading-relaxed">
-                  <em><b>My Mission</b></em> is to leave a lasting, positive mark on the world by merging engineering expertise, passionate leadership, and innovative thinking, cultivating inclusive global communities and driving impactful technological advancement.<br/><br/>
-                  To demonstrate both my mission for global impact and unique value proposition as an innovator, I created this web app using <em>Framer Motion</em> and <em>React</em>. Scroll the page to learn more about my experience, passions, and cultural background.</p>
+                  <em><b>My calling</b></em> is to build at the intersection of community, data, and technology - applying engineering depth and cross-cultural fluency to problems where the human and technical complexity are equally demanding. I'm an engineer, analyst, and community organizer with 5+ years of full-stack development, community building, & data analysis experience.<br/><br/>
+                  To demonstrate my mission for global impact, I created this web app using <em>Framer Motion</em> and <em>React</em>. Scroll the page to learn more about my experience, passions, and cultural background.</p>
               </div>
             </motion.div>
           </SlideItem>
@@ -145,7 +182,7 @@ export default function HeroSlide() {
                 viewport={{ once: true }}
               >
                 <div className="w-[28px] h-[6px] bg-white mb-[5px]"></div>
-                <TypewriterText className="w-full text-center text-white text-4xl font-[Arial] font-bold wrap-break-word" trigger={slide >= 2} step={50} delay={1000} onFinish={() => nextSlide()}>SDE2</TypewriterText>
+                <TypewriterText className="w-full text-center text-white text-4xl font-[Arial] font-bold wrap-break-word" trigger={slide >= 2} step={50} delay={1000} onFinish={() => nextSlide()}>DATA</TypewriterText>
               </motion.div>
               <motion.div
                 className="w-[28px] mt-[25px] flex flex-col items-center gap-[5px]"
@@ -155,7 +192,7 @@ export default function HeroSlide() {
                 viewport={{ once: true }}
               >
                 <div className="w-[28px] h-[6px] bg-white mb-[5px]"></div>
-                <TypewriterText className="w-full text-center text-white text-4xl font-[Arial] font-bold wrap-break-word" trigger={slide >= 3} step={50} delay={1000} onFinish={() => nextSlide()}>DATA</TypewriterText>
+                <TypewriterText className="w-full text-center text-white text-4xl font-[Arial] font-bold wrap-break-word" trigger={slide >= 3} step={50} delay={1000} onFinish={() => nextSlide()}>IMPACT</TypewriterText>
               </motion.div>
               <motion.div
                 className="w-[30px] mt-[50px] text-white text-4xl font-medium  wrap-break-word"
@@ -165,7 +202,7 @@ export default function HeroSlide() {
                 viewport={{ once: true }}
               >
                 <div className="w-[28px] h-[6px] bg-white mb-[5px]"></div>
-                <TypewriterText className="w-full text-center text-white text-4xl font-[Arial] font-bold wrap-break-word" trigger={slide >= 4} step={50} delay={1000} onFinish={() => nextSlide()}>IMPACT</TypewriterText>
+                <TypewriterText className="w-full text-center text-white text-4xl font-[Arial] font-bold wrap-break-word" trigger={slide >= 4} step={50} delay={1000} onFinish={() => nextSlide()}>SYSTEMS</TypewriterText>
               </motion.div>
             </motion.div>
           </SlideItem>
