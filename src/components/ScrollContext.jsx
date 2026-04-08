@@ -10,7 +10,7 @@ export function ScrollProvider({ children }) {
     offset: ["start start", "end end"]
   });
 
-  const [scrollYValue, setScrollYValue] = useState(null);
+  const [scrollYValue, setScrollYValue] = useState(0);
 
   const smoothYProgress = useSpring(scrollYProgress, {
     stiffness: 100,

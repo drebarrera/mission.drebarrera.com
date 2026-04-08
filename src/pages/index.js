@@ -25,6 +25,8 @@ export default function Home() {
   const slide6Opacity = useTransform(scrollYProgress, [0.8, 0.875, 0.9], [0, 0.2, 0]);
   const slide7Opacity = useTransform(scrollYProgress, [0.875, 0.9, 1], [0, 0.1, 0.3]);
 
+  if (!screenHeight) return null;if (!screenHeight) return null;
+  
   const scrollToContinue = () => {
     const scrollPoints = [0, 0.1, 0.225, 0.275, 0.53, 0.625, 0.72, 0.825, 1];
 
@@ -44,7 +46,7 @@ export default function Home() {
       <Head>
         <title>Andrés Barrera | Mission</title>
       </Head>
-      <div ref={containerRef} className="relative min-h-screen" style={{height: screenHeight * N_SLIDES}}>
+      <div key={screenHeight} ref={containerRef} className="relative min-h-screen" style={{height: screenHeight * N_SLIDES}}>
       {/* Background Slides */}
       <div className="fixed inset-0 z-0">
         {/* Slide 1 Background */}
